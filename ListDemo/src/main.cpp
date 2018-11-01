@@ -29,6 +29,9 @@ int main()
 	}
 	list->PrintList();
 
+	list->Remove(3);
+	list->PrintList();
+
 	cout<<"Reverse List:"<<endl;
 	list->ReverseList();
 	list->PrintList();
