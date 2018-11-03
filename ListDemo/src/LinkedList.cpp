@@ -148,29 +148,36 @@ Status LinkedList::Insert(int pos, int value)
  */
 Status LinkedList::Remove(int pos)
 {
-	// find the prior node
-	Node *curP = GetAddress(pos);
-	if(curP == NULL)
+	Node *preNode = NULL;
+	Node *curNode = NULL;
+	Node *nextNode = NULL;
+
+	if(pos < 0 || pos >= Length())
+	{
+		cout << "Remove node with error position"<<endl;
+		exit (-1);
+	}
+	else if(pos == 0)
+	{// find the prior node, namely , head node
+		preNode = head;
+	}
+	else if(pos < this->Length())
+	{
+		// find the prior node
+		preNode = GetAddress(pos - 1);
+	}
+
+	if(!preNode)
 	{
 		return ERROR;
 	}
 
-	// get the node to be delete
-	Node *tmp = curP->next;
-
-	// delete the node
-	if(tmp != NULL)
-	{// not NULL node
-		if(tmp->next != NULL)
-		{// not tail
-			curP->next = tmp->next;
-			tmp->next = NULL;
-		}
-		else
-		{
-			curP->next =  NULL;
-			delete tmp;
-		}
+	curNode = preNode->next;
+	if(curNode)
+	{
+		nextNode = curNode->next;
+		preNode->next = nextNode;
+		delete curNode;
 	}
 
 	return OK;
@@ -226,7 +233,7 @@ Node* LinkedList::GetAddress(int pos)
 
 		i ++;
 
-		curP = head->next;
+		curP = curP->next;
 	}
 
 	return NULL;

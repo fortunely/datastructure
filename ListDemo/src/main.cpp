@@ -29,8 +29,17 @@ int main()
 	}
 	list->PrintList();
 
-	list->Remove(3);
+	int removeIdx = 5;
+	cout<<"Remove Node Index:"<<removeIdx<<endl;
+	list->Remove(removeIdx);
 	list->PrintList();
+
+#if 0
+	removeIdx = 10;
+	cout<<"Remove Node Index:"<<removeIdx<<endl;
+	list->Remove(removeIdx);
+	list->PrintList();
+#endif
 
 	cout<<"Reverse List:"<<endl;
 	list->ReverseList();
